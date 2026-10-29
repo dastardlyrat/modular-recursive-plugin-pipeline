@@ -1,0 +1,207 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "name": "json document history buffer preserves immutable frozen snapshots",
+      "passed": true,
+      "details": {
+        "historyLength": 3,
+        "latestHistoryIndex": 2,
+        "latestText": "second",
+        "originalText": "first",
+        "historyFrozen": true,
+        "originalFrozen": true
+      }
+    },
+    {
+      "name": "generic state handler stores stateful tokenizer regex and word-count records",
+      "passed": true,
+      "details": {
+        "stateTimelineCount": 3,
+        "tokenCount": 3,
+        "matchCount": 2,
+        "wordCount": 3,
+        "aliasesPresent": true
+      }
+    },
+    {
+      "name": "stream transformation preserves original and counts transformed words",
+      "passed": true,
+      "details": {
+        "transformedText": "fox fox",
+        "wordCount": 2,
+        "matchCount": 2
+      }
+    },
+    {
+      "name": "plugin unload removes selected instance and returns removed metadata",
+      "passed": true,
+      "details": {
+        "index": 0,
+        "instanceId": "plugin.stateful.reader#001",
+        "typeId": "plugin.stateful.reader"
+      }
+    },
+    {
+      "name": "control flow skip continues and junction enters secondary pipeline",
+      "passed": true,
+      "details": {
+        "skipRecords": 1,
+        "junctionRecords": 1,
+        "inspectionRecords": 1,
+        "wordCount": 12
+      }
+    },
+    {
+      "name": "signal controlled break pauses execution before following module",
+      "passed": true,
+      "details": {
+        "state": "paused",
+        "outputWritten": false
+      }
+    },
+    {
+      "name": "hook bus lifecycle hooks fire in deterministic order",
+      "passed": true,
+      "details": {
+        "recordedHookPhases": [
+          "pipeline-execution-started:main",
+          "module-execution-started:system.start",
+          "module-execution-started:plugin.stateful.reader",
+          "module-execution-started:plugin.stateful.output",
+          "module-execution-started:system.stop",
+          "pipeline-execution-finished:main"
+        ]
+      }
+    },
+    {
+      "name": "hook event payloads are frozen and redacted",
+      "passed": true,
+      "details": {
+        "eventFrozen": true,
+        "contextSummaryFrozen": true,
+        "hasContextSummary": true,
+        "hasFullContextProperty": false,
+        "dataTopLevelKeys": [
+          "text",
+          "extra"
+        ]
+      }
+    },
+    {
+      "name": "hook failures are recorded and can continue without stopping the pipeline",
+      "passed": true,
+      "details": {
+        "hookFailureCount": 4,
+        "outputWritten": true,
+        "state": "running"
+      }
+    },
+    {
+      "name": "hypervisor observes lifecycle hooks and emits oversight snapshot",
+      "passed": true,
+      "details": {
+        "healthState": "nominal",
+        "eventCount": 10,
+        "moduleTimingKeys": [
+          "system.start",
+          "plugin.stateful.reader",
+          "plugin.stateful.output",
+          "system.stop"
+        ]
+      }
+    },
+    {
+      "name": "hypervisor observes junction enter and return hook phases",
+      "passed": true,
+      "details": {
+        "controlFlowRecords": 2,
+        "observedHookPhases": [
+          "pipeline-execution-started",
+          "module-execution-started",
+          "module-execution-finished",
+          "module-execution-started",
+          "module-execution-finished",
+          "module-execution-started",
+          "junction-pipeline-entered",
+          "module-execution-started",
+          "module-execution-finished",
+          "module-execution-started",
+          "module-execution-finished",
+          "module-execution-started",
+          "module-execution-finished",
+          "junction-pipeline-returned",
+          "module-execution-finished",
+          "module-execution-started",
+          "module-execution-finished",
+          "module-execution-started",
+          "module-execution-finished",
+          "pipeline-execution-finished"
+        ]
+      }
+    },
+    {
+      "name": "strict JSON clone rejects runtime objects and descriptor tricks",
+      "passed": true,
+      "details": {
+        "rejectedLabels": [
+          "Map:TypeError",
+          "Set:TypeError",
+          "Date:TypeError",
+          "RegExp:TypeError",
+          "function:TypeError",
+          "accessor:TypeError",
+          "symbol-key:TypeError"
+        ],
+        "acceptedClone": {
+          "text": "safe",
+          "items": [
+            1,
+            true,
+            null
+          ]
+        }
+      }
+    },
+    {
+      "name": "regex ReDoS guard rejects nested quantified groups",
+      "passed": true,
+      "details": {
+        "rejectedMessage": "Potentially unsafe regex source rejected: nested quantified group.",
+        "safeRegex": "\\bfox\\b"
+      }
+    },
+    {
+      "name": "execution node budget aborts excessive passes",
+      "passed": true,
+      "details": {
+        "state": "error",
+        "errorCount": 1,
+        "budgetReason": "maximumNodesPerPass"
+      }
+    },
+    {
+      "name": "execution branch budget aborts excessive junction traversal",
+      "passed": true,
+      "details": {
+        "state": "error",
+        "errorCount": 1,
+        "budgetReason": "maximumBranchEntriesPerPass"
+      }
+    },
+    {
+      "name": "callable registry shim supports registered callable deep cloning",
+      "passed": true,
+      "details": {
+        "ok": true,
+        "tested": [
+          "registered callable clone",
+          "callable internal state copy",
+          "post-clone state divergence",
+          "circular object clone"
+        ]
+      }
+    }
+  ],
+  "completedAt": "2026-04-26T22:22:23.379Z"
+}

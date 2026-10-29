@@ -1,0 +1,216 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Merged Modular Recursive Plugin Pipeline v12 - Tabbed UI</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header>
+  <h1>Merged Modular Recursive Plugin Pipeline v12</h1>
+  <p>Tabbed control surface: run and output on the main tab, upload on its own tab, branching/configuration on its own tab, and debug/registry output isolated for inspection.</p>
+</header>
+
+<main class="tabbed-shell">
+  <nav class="tab-bar" aria-label="Pipeline workspace tabs">
+    <button type="button" class="tab-button active" data-tab="main" aria-selected="true">Main Run</button>
+    <button type="button" class="tab-button" data-tab="upload" aria-selected="false">Upload / Input</button>
+    <button type="button" class="tab-button" data-tab="configuration" aria-selected="false">Configuration</button>
+    <button type="button" class="tab-button" data-tab="debug" aria-selected="false">Debug</button>
+    <button type="button" class="tab-button" data-tab="hypervisor" aria-selected="false">Hypervisor</button>
+  </nav>
+
+  <section class="tab-panel active" data-tab-panel="main">
+    <div class="panel-grid main-run-grid">
+      <section class="card run-card">
+        <h2>Run</h2>
+        <div class="status">
+          <div>Runtime: <b id="runtimeState">idle</b></div>
+          <div>Cycles: <b id="cycleCount">0</b></div>
+          <div>Instances: <b id="pluginCount">0</b></div>
+          <div>Errors: <b id="errorCount">0</b></div>
+        </div>
+
+        <div class="grid three-column-grid">
+          <button type="button" data-signal="START">Start Loop</button>
+          <button type="button" data-signal="STOP">Stop</button>
+          <button type="button" id="runOnceButton">Run Once</button>
+          <button type="button" data-signal="PAUSE">Pause</button>
+          <button type="button" data-signal="RESUME">Resume</button>
+          <button type="button" data-signal="RESET">Reset</button>
+        </div>
+      </section>
+
+      <section class="card output-card">
+        <h2>Output</h2>
+        <pre id="outputPane">No output yet.</pre>
+      </section>
+    </div>
+  </section>
+
+  <section class="tab-panel" data-tab-panel="upload" hidden>
+    <section class="card wide-card">
+      <h2>Upload / Input</h2>
+
+      <label for="inputMode">Reader Mode</label>
+      <select id="inputMode">
+        <option value="jsonText">JSON converted from input text</option>
+        <option value="jsonObject">JSON passed as object</option>
+        <option value="jsonFile">JSON file</option>
+      </select>
+
+      <label for="inputText">Input Text / JSON</label>
+      <textarea id="inputText">{"text":"The quick brown fox jumps over 13 lazy dogs. The fox is quick."}</textarea>
+
+      <label for="jsonFile">Optional JSON File</label>
+      <input id="jsonFile" type="file" accept="application/json,.json">
+    </section>
+  </section>
+
+  <section class="tab-panel" data-tab-panel="configuration" hidden>
+    <div class="panel-grid configuration-grid">
+      <section class="card">
+        <h2>Pipeline Presets</h2>
+        <div class="grid two-column-grid">
+          <button type="button" id="loadStreamDefaultButton">Load Stream Default</button>
+          <button type="button" id="loadStatefulDefaultButton">Load Stateful Default</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Branching</h2>
+
+        <label for="branchTargetPipelineName">Target Pipeline Name</label>
+        <input id="branchTargetPipelineName" value="secondary">
+
+        <label for="branchMaximumDepth">Maximum Junction Depth</label>
+        <input id="branchMaximumDepth" type="number" min="1" max="32" value="4">
+
+        <label for="branchJsonPath">JSON Test Path</label>
+        <input id="branchJsonPath" value="text">
+
+        <label for="branchOperator">JSON Test Operator</label>
+        <select id="branchOperator">
+          <option value="truthy">truthy</option>
+          <option value="exists" selected>exists</option>
+          <option value="contains">contains</option>
+          <option value="strictEquals">strictEquals</option>
+          <option value="greaterThan">greaterThan</option>
+          <option value="lengthGreaterThan">lengthGreaterThan</option>
+          <option value="always">always</option>
+          <option value="never">never</option>
+        </select>
+
+        <label for="branchExpectedValue">Expected Value for Branch Test</label>
+        <input id="branchExpectedValue" value="fox">
+
+        <label for="branchWhen">Branch When Test Result Is</label>
+        <select id="branchWhen">
+          <option value="true" selected>true</option>
+          <option value="false">false</option>
+        </select>
+
+        <label for="branchSignalName">External Branch Signal Name</label>
+        <input id="branchSignalName" value="branch-control-signal">
+
+        <label for="branchSignalValue">External Branch Signal Value</label>
+        <input id="branchSignalValue" value="true">
+
+        <div class="grid one-column-grid">
+          <button type="button" id="applyBranchConfigurationButton">Apply Branching Configuration</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Control Flow Signals</h2>
+
+        <label for="allowNextModuleSignal">Allow next module after conditional filter</label>
+        <select id="allowNextModuleSignal">
+          <option value="true" selected>Allow next module</option>
+          <option value="false">Skip next module</option>
+        </select>
+
+        <label for="breakControlSignal">Break module signal</label>
+        <select id="breakControlSignal">
+          <option value="NONE" selected>NONE - continue</option>
+          <option value="STOP">STOP - stop execution</option>
+          <option value="PAUSE">PAUSE - pause after break module</option>
+          <option value="RESUME">RESUME - resume execution</option>
+        </select>
+
+        <div class="grid one-column-grid">
+          <button type="button" id="applyControlSignalsButton">Apply Control Signals</button>
+        </div>
+      </section>
+
+      <section class="card">
+        <h2>Plugin UI</h2>
+
+        <label for="installedPluginSelect">Installed Plugin Type</label>
+        <select id="installedPluginSelect"></select>
+
+        <label for="insertIndex">Insert Index</label>
+        <input id="insertIndex" type="number" min="0" value="0">
+
+        <div class="grid two-column-grid">
+          <button type="button" id="loadPluginButton">Load New Instance</button>
+          <button type="button" id="unloadPluginButton">Unload Selected</button>
+          <button type="button" id="moveUpButton">Move Up</button>
+          <button type="button" id="moveDownButton">Move Down</button>
+        </div>
+
+        <label for="loadedPluginSelect">Loaded Plugin Instances</label>
+        <select id="loadedPluginSelect" size="12"></select>
+      </section>
+
+      <section class="card">
+        <h2>Regex Settings</h2>
+
+        <label for="regexInput">Regex</label>
+        <input id="regexInput" value="\bfox\b">
+
+        <label for="regexFlags">Flags</label>
+        <input id="regexFlags" value="gi">
+
+        <div class="grid one-column-grid">
+          <button type="button" id="regexButton">Execute Stateful Regex Search Out-of-Band</button>
+          <button type="button" id="runSelfTestsButton">Run Built-In Self Tests</button>
+        </div>
+      </section>
+    </div>
+  </section>
+
+  <section class="tab-panel" data-tab-panel="debug" hidden>
+    <section class="card wide-card">
+      <h2>Debug / Registry</h2>
+      <pre id="debugPane">No debug yet.</pre>
+    </section>
+  </section>
+
+  <section class="tab-panel" data-tab-panel="hypervisor" hidden>
+    <section class="card wide-card">
+      <h2>Hypervisor Oversight</h2>
+      <div class="status hypervisor-status">
+        <div>Health: <b id="hypervisorHealth">unattached</b></div>
+        <div>Observed Events: <b id="hypervisorEventCount">0</b></div>
+        <div>Alerts: <b id="hypervisorAlertCount">0</b></div>
+        <div>Avg Main Pass ms: <b id="hypervisorAveragePipelineMs">0</b></div>
+      </div>
+      <pre id="hypervisorPane">No hypervisor snapshot yet.</pre>
+    </section>
+  </section>
+</main>
+
+<script src="pipeline-core.js"></script>
+<script src="browser-adapters.js"></script>
+<script src="stateful-plugins.js"></script>
+<script src="stream-plugins.js"></script>
+<script src="control-flow-plugins.js"></script>
+<script src="advanced-flow-data-plugins.js"></script>
+<script src="deep-clone-callable-registry.browser.js"></script>
+<script src="pipeline-hypervisor.js"></script>
+<script src="self-tests.js"></script>
+<script src="application-ui.js"></script>
+</body>
+</html>

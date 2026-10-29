@@ -1,0 +1,334 @@
+{
+  "validationKind": "Initial repository import validation",
+  "startedAtUtc": "2026-10-29T16:54:09.2025709Z",
+  "completedAtUtc": "2026-10-29T16:54:09.4858425Z",
+  "sourceDirectory": "source/",
+  "environment": {
+    "os": "Windows",
+    "node": "v24.14.0",
+    "git": "git version 2.53.0.windows.2"
+  },
+  "sourceIdentity": {
+    "algorithm": "SHA-256",
+    "files": [
+      {
+        "path": "source/advanced-flow-data-plugins.js",
+        "sha256": "7f5e03f178f95c985198cbb4001d875ee797737813925e4f6df4f9def82a519c",
+        "bytes": 34811
+      },
+      {
+        "path": "source/application-ui.js",
+        "sha256": "a482cbfc11ecb9b167dfd44800103600bb7680d35b59079ae077f99adab8cc2e",
+        "bytes": 46142
+      },
+      {
+        "path": "source/browser-adapters.js",
+        "sha256": "88577063116a82ea0e2482eef8f6a4c1cffe9ec60e9036e6846f6d85ecb73a98",
+        "bytes": 3760
+      },
+      {
+        "path": "source/callable-registry/deep_clone_callable_registry_module_hardened.js",
+        "sha256": "cd7b296ea18077fd55416be3b0008bac398043c02038ec1d76ac17172459bc8e",
+        "bytes": 41475
+      },
+      {
+        "path": "source/callable-registry/self_test.mjs",
+        "sha256": "41a33bbda4d7aa57a2053236b2750444781e84705b7c8121c50e82a338f1c9de",
+        "bytes": 182
+      },
+      {
+        "path": "source/control-flow-plugins.js",
+        "sha256": "5751788957d01cfe80787bcc18e54ad8b94e10782e17f170698e9534109f9534",
+        "bytes": 42776
+      },
+      {
+        "path": "source/deep-clone-callable-registry.browser.js",
+        "sha256": "529c71f78fd27054cc696e78356bba5f0569fd668a517dcf9cff8afc5ff46280",
+        "bytes": 41824
+      },
+      {
+        "path": "source/index.html",
+        "sha256": "37001f564f5c698ae11fc04d4390fba09623f3f5586d4e75206e25baf7ca1dd1",
+        "bytes": 8780
+      },
+      {
+        "path": "source/pipeline-core.js",
+        "sha256": "b9b23d8efae7a069f3f3e07ae8378c15dea2bb8b521f155344e0cea1220ca21f",
+        "bytes": 149798
+      },
+      {
+        "path": "source/pipeline-hypervisor.js",
+        "sha256": "8aa000f15d31d53128bd4857d3051920f42c6f12aa04be85ce9f8c68d199e9bc",
+        "bytes": 22833
+      },
+      {
+        "path": "source/README.md",
+        "sha256": "4e969aed9cfb5224c246a0970029185e1ea862b0018118aa4b5de73df6e2a4f9",
+        "bytes": 12759
+      },
+      {
+        "path": "source/run-self-tests-node.js",
+        "sha256": "c6905e066a031a1be7056d53299feec90428e2f688d1f8d580056023bc2e03ea",
+        "bytes": 545
+      },
+      {
+        "path": "source/SELF_TEST_RESULT.json",
+        "sha256": "8195fc175ca499b2a305b236e009ca5d1721d47e58bac194e771cc9b57a17abb",
+        "bytes": 5707
+      },
+      {
+        "path": "source/self-tests.js",
+        "sha256": "a28bcbc09af763526c3010a358d7d8ee0a1d0ef9ed6820241bbb76652126fe9c",
+        "bytes": 49385
+      },
+      {
+        "path": "source/stateful-plugins.js",
+        "sha256": "0e32091b30a51bd2163c3ffc8fb7cd7ef153e2d7b97dbebfd79e46c4861bcc0a",
+        "bytes": 19252
+      },
+      {
+        "path": "source/stream-plugins.js",
+        "sha256": "4fb74a2649a7d80609370a49ff9af03abaf1adfc32e81ec45fa3cc5be0b87e54",
+        "bytes": 26002
+      },
+      {
+        "path": "source/style.css",
+        "sha256": "596ad11d88cd7cf98670bfbb13c47eb7d915c43a42c46dbcc26daad81f070870",
+        "bytes": 3667
+      }
+    ],
+    "unchangedAfterTests": true
+  },
+  "suppliedHistoricalReport": "source/SELF_TEST_RESULT.json (preserved unchanged)",
+  "tests": [
+    {
+      "command": "node source/run-self-tests-node.js",
+      "exitCode": 0,
+      "result": {
+        "passed": true,
+        "results": [
+          {
+            "name": "json document history buffer preserves immutable frozen snapshots",
+            "passed": true,
+            "details": {
+              "historyLength": 3,
+              "latestHistoryIndex": 2,
+              "latestText": "second",
+              "originalText": "first",
+              "historyFrozen": true,
+              "originalFrozen": true
+            }
+          },
+          {
+            "name": "generic state handler stores stateful tokenizer regex and word-count records",
+            "passed": true,
+            "details": {
+              "stateTimelineCount": 3,
+              "tokenCount": 3,
+              "matchCount": 2,
+              "wordCount": 3,
+              "aliasesPresent": true
+            }
+          },
+          {
+            "name": "stream transformation preserves original and counts transformed words",
+            "passed": true,
+            "details": {
+              "transformedText": "fox fox",
+              "wordCount": 2,
+              "matchCount": 2
+            }
+          },
+          {
+            "name": "plugin unload removes selected instance and returns removed metadata",
+            "passed": true,
+            "details": {
+              "index": 0,
+              "instanceId": "plugin.stateful.reader#001",
+              "typeId": "plugin.stateful.reader"
+            }
+          },
+          {
+            "name": "control flow skip continues and junction enters secondary pipeline",
+            "passed": true,
+            "details": {
+              "skipRecords": 1,
+              "junctionRecords": 1,
+              "inspectionRecords": 1,
+              "wordCount": 12
+            }
+          },
+          {
+            "name": "signal controlled break pauses execution before following module",
+            "passed": true,
+            "details": {
+              "state": "paused",
+              "outputWritten": false
+            }
+          },
+          {
+            "name": "hook bus lifecycle hooks fire in deterministic order",
+            "passed": true,
+            "details": {
+              "recordedHookPhases": [
+                "pipeline-execution-started:main",
+                "module-execution-started:system.start",
+                "module-execution-started:plugin.stateful.reader",
+                "module-execution-started:plugin.stateful.output",
+                "module-execution-started:system.stop",
+                "pipeline-execution-finished:main"
+              ]
+            }
+          },
+          {
+            "name": "hook event payloads are frozen and redacted",
+            "passed": true,
+            "details": {
+              "eventFrozen": true,
+              "contextSummaryFrozen": true,
+              "hasContextSummary": true,
+              "hasFullContextProperty": false,
+              "dataTopLevelKeys": [
+                "text",
+                "extra"
+              ]
+            }
+          },
+          {
+            "name": "hook failures are recorded and can continue without stopping the pipeline",
+            "passed": true,
+            "details": {
+              "hookFailureCount": 4,
+              "outputWritten": true,
+              "state": "running"
+            }
+          },
+          {
+            "name": "hypervisor observes lifecycle hooks and emits oversight snapshot",
+            "passed": true,
+            "details": {
+              "healthState": "nominal",
+              "eventCount": 10,
+              "moduleTimingKeys": [
+                "system.start",
+                "plugin.stateful.reader",
+                "plugin.stateful.output",
+                "system.stop"
+              ]
+            }
+          },
+          {
+            "name": "hypervisor observes junction enter and return hook phases",
+            "passed": true,
+            "details": {
+              "controlFlowRecords": 2,
+              "observedHookPhases": [
+                "pipeline-execution-started",
+                "module-execution-started",
+                "module-execution-finished",
+                "module-execution-started",
+                "module-execution-finished",
+                "module-execution-started",
+                "junction-pipeline-entered",
+                "module-execution-started",
+                "module-execution-finished",
+                "module-execution-started",
+                "module-execution-finished",
+                "module-execution-started",
+                "module-execution-finished",
+                "junction-pipeline-returned",
+                "module-execution-finished",
+                "module-execution-started",
+                "module-execution-finished",
+                "module-execution-started",
+                "module-execution-finished",
+                "pipeline-execution-finished"
+              ]
+            }
+          },
+          {
+            "name": "strict JSON clone rejects runtime objects and descriptor tricks",
+            "passed": true,
+            "details": {
+              "rejectedLabels": [
+                "Map:TypeError",
+                "Set:TypeError",
+                "Date:TypeError",
+                "RegExp:TypeError",
+                "function:TypeError",
+                "accessor:TypeError",
+                "symbol-key:TypeError"
+              ],
+              "acceptedClone": {
+                "text": "safe",
+                "items": [
+                  1,
+                  true,
+                  null
+                ]
+              }
+            }
+          },
+          {
+            "name": "regex ReDoS guard rejects nested quantified groups",
+            "passed": true,
+            "details": {
+              "rejectedMessage": "Potentially unsafe regex source rejected: nested quantified group.",
+              "safeRegex": "\\bfox\\b"
+            }
+          },
+          {
+            "name": "execution node budget aborts excessive passes",
+            "passed": true,
+            "details": {
+              "state": "error",
+              "errorCount": 1,
+              "budgetReason": "maximumNodesPerPass"
+            }
+          },
+          {
+            "name": "execution branch budget aborts excessive junction traversal",
+            "passed": true,
+            "details": {
+              "state": "error",
+              "errorCount": 1,
+              "budgetReason": "maximumBranchEntriesPerPass"
+            }
+          },
+          {
+            "name": "callable registry shim supports registered callable deep cloning",
+            "passed": true,
+            "details": {
+              "ok": true,
+              "tested": [
+                "registered callable clone",
+                "callable internal state copy",
+                "post-clone state divergence",
+                "circular object clone"
+              ]
+            }
+          }
+        ],
+        "completedAt": "2026-10-29T16:54:09.401Z"
+      }
+    },
+    {
+      "command": "node source/callable-registry/self_test.mjs",
+      "exitCode": 0,
+      "result": {
+        "ok": true,
+        "tested": [
+          "registered callable clone",
+          "callable internal state copy",
+          "post-clone state divergence",
+          "circular object clone"
+        ]
+      }
+    }
+  ],
+  "limits": [
+    "Existing automated tests only; no browser interaction or visual validation performed.",
+    "Passing tests do not establish complete coverage, isolation, or release readiness."
+  ],
+  "privacyRedaction": "Local source-directory identity and exact Windows build generalized; recorded tests and source hashes retained."
+}
