@@ -156,3 +156,11 @@ declare a newly reconciled release version.
 See [source/README.md](source/README.md) for the existing development notes and
 API examples. No standalone project license is included in this tree; existing
 notices in supplied files remain unchanged.
+
+## Project directory and related work
+
+[Browse the dastardlyrat project directory](https://dastardlyrat.github.io/).
+
+- [this-repository-machine-interface](https://github.com/dastardlyrat/this-repository-machine-interface)
+- [lexicon-atlas](https://github.com/dastardlyrat/lexicon-atlas)
+- [multiplex](https://github.com/dastardlyrat/multiplex)
