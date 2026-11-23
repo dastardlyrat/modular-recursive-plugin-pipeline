@@ -164,3 +164,7 @@ notices in supplied files remain unchanged.
 - [this-repository-machine-interface](https://github.com/dastardlyrat/this-repository-machine-interface)
 - [lexicon-atlas](https://github.com/dastardlyrat/lexicon-atlas)
 - [multiplex](https://github.com/dastardlyrat/multiplex)
+
+## Public cross-repository discovery
+
+**Public research directory:** [topic map](https://dastardlyrat.github.io/research.html) · [machine-oriented navigation](https://dastardlyrat.github.io/machine.html) · [dated structured catalog](https://dastardlyrat.github.io/research-index.json). The directory indexes public entry points for source-led study; it is not a license override, consent to personal-methodology fingerprinting, or runtime authorization.
